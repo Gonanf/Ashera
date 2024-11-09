@@ -12,11 +12,18 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.send_header("Content-type","text/html")
+        debcon = sqlite3.connect("db.sqlite3")
+        debcursor = debcon.cursor()
         self.end_headers()
-        self.wfile.write(bytes("Hola","utf-8"))
+        debcursor.execute("SELECT * FROM numeros;")
+        response = debcursor.fetchall()
+        response_server = {a[0]: a[1] == None for a in response}
+        print(response_server)
+        print(json.dumps(response_server, sort_keys=True, indent=4))
+        self.wfile.write(bytes(json.dumps(response_server, sort_keys=True, indent=4),"utf-8"))
 
     def do_POST(self):
-        self.end_headers()
+
         size = int(self.headers.get('content-length'))
         data = self.rfile.read(size)
         json_data = json.loads(data)
@@ -25,6 +32,8 @@ class handler(BaseHTTPRequestHandler):
         debcursor.execute(f"SELECT nombre FROM numeros WHERE numero = {json_data['numero']};")
         if debcursor.fetchone() != (None,):
             self.send_error(404,"Already taken number")
+            self.send_header("Content-type","text/html")
+            self.end_headers()
             return
         print(f"UPDATE numeros SET nombre = '{json_data['nombre']}', apellido = '{json_data['apellido']}' WHERE numero = {json_data['numero']};")
         debcursor.execute(f"UPDATE numeros SET nombre = '{json_data['nombre']}', apellido = '{json_data['apellido']}' WHERE numero = {json_data['numero']};")
@@ -33,6 +42,9 @@ class handler(BaseHTTPRequestHandler):
         debcursor.close()
         debcon.close()
         print(json_data, len(json_data))
+        self.send_response(200)
+        self.send_header("Content-type","text/html")
+        self.end_headers()
 
     def do_OPTIONS(self):
         self.send_response(200)
