@@ -1,0 +1,34 @@
+a.active:hover{
+    padding: 2%;
+}
+
+a.active{
+    transition: padding .4s ease, transform .4s linear ;
+    display: block;
+}
+
+#main-comprar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+#image{
+    width: auto;
+    height: auto;
+}
+
+.numero.deshabilitado{
+    text-decoration: dashed;
+    background-color: red;
+    pointer-events: none;
+}
+
+.numero{
+    text-decoration: none;
+    background-color: chartreuse;
+    border: solid blue 5px;
+    border-radius: 100%;
+}
