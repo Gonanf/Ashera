@@ -2,6 +2,14 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import sqlite3
 import sys
 import json
+import ssl
+
+def get_ssl_context(certfile, keyfile):
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    context.load_cert_chain(certfile, keyfile)
+    context.set_ciphers("@SECLEVEL=1:ALL")
+    return context
+
 class handler(BaseHTTPRequestHandler):
     def end_headers(self):
         self.send_header('Access-Control-Allow-Origin',"*")
@@ -68,6 +76,8 @@ if __name__ == "__main__":
     debcon.close()
     print("Iniciao")
     try:
+        context = get_ssl_context("cert.pem","key.pem")
+        webserver.socket = context.wrap_socket(webserver.socket, server_side=True)
         webserver.serve_forever()
     except KeyboardInterrupt:
         pass
