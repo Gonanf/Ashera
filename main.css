@@ -2,6 +2,17 @@ a.active:hover{
     padding: 2%;
 }
 
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-image: url(./img/gato.png);
+    background-color: black;
+    background-size: 10%;
+}
+
 a.active{
     transition: padding .4s ease, transform .4s linear ;
     display: block;
