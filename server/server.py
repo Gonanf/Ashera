@@ -52,7 +52,7 @@ class handler(BaseHTTPRequestHandler):
 
     
 if __name__ == "__main__":
-    webserver = HTTPServer(('0.0.0.0',8080),handler)
+    webserver = HTTPServer(('192.168.1.45',28129),handler)
     debcon = sqlite3.connect("db.sqlite3")
     debcursor = debcon.cursor()
     if len(sys.argv) > 1:
