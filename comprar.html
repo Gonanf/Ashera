@@ -32,7 +32,7 @@
 <script>
     let numeros_cont = document.getElementById("numeros-holder");
     
-    fetch('https://181.26.65.187:28129', {
+    fetch('https://ashera.gabysolotorevsky100.workers.dev/get', {
         method: "GET",
     }).then(a => a.json()).then(a => {
         console.log(typeof(a))

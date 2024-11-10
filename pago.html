@@ -16,7 +16,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script>
     console.log(window.location.search.substring(1).split('?'))
-    fetch('https://181.26.65.187:28129', {
+    fetch('https://ashera.gabysolotorevsky100.workers.dev/post', {
         method:  "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -24,9 +24,9 @@
         },
 
         body: JSON.stringify({
+            numero: window.location.search.substring(1).split('?')[0],
             nombre: window.location.search.substring(1).split('?')[1],
-            apellido: window.location.search.substring(1).split('?')[2],
-            numero: window.location.search.substring(1).split('?')[0]
+            apellido: window.location.search.substring(1).split('?')[2]
         })
     }).then(function(a) {
         if (a.statusText){
