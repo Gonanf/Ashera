@@ -10,7 +10,7 @@
 <body>
     <div style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
         <h1 class="text-xl-center text-white">Registrarse</h1>
-        <form action="http://127.0.0.1:8080" method="post" id ="forma">
+        <form action="./pago.html" method="post" id ="forma">
             <input type="text" name="nombre" id="nombre" placeholder="Ingresar nombre">
             <input type="text" name="apellido" id="apellido" placeholder="Ingresar apellido">
             <button type="submit" id="entregar">entregar</button>
@@ -19,20 +19,4 @@
     
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script>
-    let nombre = document.getElementById("nombre")
-    let apellido = document.getElementById("apellido")
-    let entregar = document.getElementById("entregar")
-    let forma = document.getElementById("forma")
-    entregar.onclick = async(e) => {
-        e.preventDefault();
-        let form_data = new FormData(forma,entregar)
-        form_data.append("numero",window.location.search.substring(1).split('=')[1])
-        /*fetch('https://ashera.gabysolotorevsky100.workers.dev/post', {
-            method: "POST",
-            body: form_data
-        });*/
-        window.location.replace("./pago.html?"+form_data.get("numero")+"?"+form_data.get("nombre")+"?"+form_data.get("apellido"))
-    }
-</script>
 </html>
